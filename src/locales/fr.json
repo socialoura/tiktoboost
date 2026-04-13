@@ -203,7 +203,7 @@
     "emailRequired": "Veuillez entrer une adresse email valide.",
     "emailOptional": "optionnel — nous vous enverrons votre reçu ici",
     "orPayWithCard": "ou payer par carte",
-    "paySecurely": "Payer {price} en toute sécurité",
+    "paySecurely": "Payer {price}",
     "paymentSuccessful": "Paiement réussi !",
     "confirmationSentTo": "Confirmation envoyée à {email}",
     "boostEvenMore": "Boostez encore plus",

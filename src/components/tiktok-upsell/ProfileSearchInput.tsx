@@ -154,7 +154,7 @@ export default function ProfileSearchInput() {
   }
 
   return (
-    <div className="w-full max-w-xl mx-auto">
+    <div className="w-full max-w-xl lg:max-w-2xl mx-auto sm:mx-0">
       <p className="flex items-center gap-1.5 text-[12px] sm:text-[13px] text-zinc-500 mb-3 sm:mb-2">
         <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-white/[0.06] border border-white/[0.08] text-[9px] font-bold text-zinc-400 flex-shrink-0">i</span>
         {t("pricing.accountPublic")}
@@ -170,7 +170,7 @@ export default function ProfileSearchInput() {
             onFocus={() => posthog?.capture("input_focused", { platform, currency })}
             onKeyDown={handleKeyDown}
             placeholder={t("pricing.enterTikTokUsername")}
-            className="w-full pl-11 pr-5 py-5 sm:py-4 rounded-3xl sm:rounded-2xl bg-white/[0.06] border border-white/[0.08] text-white text-[17px] sm:text-[15px] placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.2] focus:bg-white/[0.08] transition-all duration-300"
+            className="w-full pl-11 pr-5 py-5 sm:py-4 lg:py-5 rounded-3xl sm:rounded-2xl lg:rounded-2xl bg-white/[0.06] border border-white/[0.08] text-white text-[17px] sm:text-[15px] lg:text-[16px] placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.2] focus:bg-white/[0.08] transition-all duration-300"
             autoComplete="off"
             spellCheck={false}
             disabled={profileLoading}
@@ -179,7 +179,7 @@ export default function ProfileSearchInput() {
         <button
           onClick={() => handleSearch()}
           disabled={profileLoading}
-          className="shine cta-pulse w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center gap-2.5 px-8 sm:px-7 py-5 sm:py-4 rounded-3xl sm:rounded-2xl text-white text-[16px] sm:text-[15px] font-semibold transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] disabled:opacity-50 disabled:animate-none"
+          className="shine cta-pulse w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center gap-2.5 px-8 sm:px-7 lg:px-9 py-5 sm:py-4 lg:py-5 rounded-3xl sm:rounded-2xl lg:rounded-2xl text-white text-[16px] sm:text-[15px] lg:text-[16px] font-semibold transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] disabled:opacity-50 disabled:animate-none"
           style={{ background: gradient, boxShadow: `0 0 30px -6px ${accentColor}50` }}
         >
           {profileLoading ? (
@@ -198,7 +198,7 @@ export default function ProfileSearchInput() {
         </button>
       </div>
 
-      <div className="flex flex-col justify-center items-center mt-12 sm:mt-4">
+      <div className="flex flex-col justify-center items-center mt-12 sm:mt-4 sm:items-start">
         <div className="flex items-center">
           <span className="font-medium text-xl mt-2 mr-2">4.8 <span className="opacity-70">|</span></span>
           <img className="h-[24px] mt-2" src="/stars52.svg" alt="4.8 rating stars" />

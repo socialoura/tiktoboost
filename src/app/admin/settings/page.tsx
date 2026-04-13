@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import AdminShell from "@/components/admin/AdminShell";
-import { Loader2, Save, Eye, EyeOff, Zap } from "lucide-react";
+import { Loader2, Save, Eye, EyeOff, Zap, SlidersHorizontal } from "lucide-react";
 
 interface AnnouncementBarSettings {
   enabled: boolean;
@@ -18,6 +18,12 @@ interface BFServiceIds {
   tiktok_views: number;
 }
 
+interface DefaultQuantities {
+  followers: number;
+  likes: number;
+  views: number;
+}
+
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<AnnouncementBarSettings>({
     enabled: true,
@@ -31,11 +37,18 @@ export default function AdminSettingsPage() {
     tiktok_likes: 14256,
     tiktok_views: 640,
   });
+  const [defaultQty, setDefaultQty] = useState<DefaultQuantities>({
+    followers: 0,
+    likes: 0,
+    views: 0,
+  });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [savingBf, setSavingBf] = useState(false);
+  const [savingQty, setSavingQty] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [bfMessage, setBfMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [qtyMessage, setQtyMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -43,9 +56,10 @@ export default function AdminSettingsPage() {
       if (!token) return;
 
       try {
-        const [annRes, bfRes] = await Promise.all([
+        const [annRes, bfRes, qtyRes] = await Promise.all([
           fetch("/api/admin/announcement-bar", { headers: { Authorization: `Bearer ${token}` } }),
           fetch("/api/admin/bf-services", { headers: { Authorization: `Bearer ${token}` } }),
+          fetch("/api/admin/default-quantities", { headers: { Authorization: `Bearer ${token}` } }),
         ]);
         if (annRes.ok) {
           const data = await annRes.json();
@@ -54,6 +68,10 @@ export default function AdminSettingsPage() {
         if (bfRes.ok) {
           const data = await bfRes.json();
           setBfIds(data);
+        }
+        if (qtyRes.ok) {
+          const data = await qtyRes.json();
+          setDefaultQty(data);
         }
       } catch (err) {
         console.error("Failed to fetch settings:", err);
@@ -266,6 +284,81 @@ export default function AdminSettingsPage() {
                 )}
                 Save Changes
               </button>
+            </div>
+
+            {/* Default Quantities Section */}
+            <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-xl bg-cyan-500/20 flex items-center justify-center">
+                  <SlidersHorizontal className="w-5 h-5 text-cyan-400" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-semibold text-white">Quantités par défaut</h2>
+                  <p className="text-sm text-gray-400 mt-0.5">
+                    Valeurs pré-sélectionnées quand un utilisateur arrive sur le configurateur. Mettez 0 pour ne rien pré-sélectionner.
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4">
+                {(["followers", "likes", "views"] as const).map((key) => (
+                  <div key={key}>
+                    <label className="block text-xs font-medium text-gray-400 mb-1.5 capitalize">
+                      {key}
+                    </label>
+                    <input
+                      type="number"
+                      min={0}
+                      value={defaultQty[key]}
+                      onChange={(e) => setDefaultQty({ ...defaultQty, [key]: parseInt(e.target.value) || 0 })}
+                      className="w-full px-3 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white font-mono text-sm placeholder:text-gray-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 focus:outline-none transition-all"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Save Qty Button */}
+              <div className="flex items-center justify-between pt-4 mt-4 border-t border-white/10">
+                {qtyMessage && (
+                  <p className={`text-sm ${qtyMessage.type === "success" ? "text-green-400" : "text-red-400"}`}>
+                    {qtyMessage.text}
+                  </p>
+                )}
+                <button
+                  onClick={async () => {
+                    const token = localStorage.getItem("adminToken");
+                    if (!token) return;
+                    setSavingQty(true);
+                    setQtyMessage(null);
+                    try {
+                      const res = await fetch("/api/admin/default-quantities", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+                        body: JSON.stringify(defaultQty),
+                      });
+                      if (res.ok) {
+                        setQtyMessage({ type: "success", text: "Quantités par défaut sauvegardées !" });
+                      } else {
+                        const data = await res.json();
+                        setQtyMessage({ type: "error", text: data.error || "Erreur" });
+                      }
+                    } catch {
+                      setQtyMessage({ type: "error", text: "Erreur lors de la sauvegarde" });
+                    } finally {
+                      setSavingQty(false);
+                    }
+                  }}
+                  disabled={savingQty}
+                  className="ml-auto flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold transition-all disabled:opacity-50"
+                >
+                  {savingQty ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Save className="w-4 h-4" />
+                  )}
+                  Sauvegarder
+                </button>
+              </div>
             </div>
 
             {/* BulkFollows Service IDs Section */}

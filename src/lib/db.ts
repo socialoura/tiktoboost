@@ -615,6 +615,28 @@ export async function setBFServiceIds(ids: BFServiceIds): Promise<void> {
   return setSetting("bf_service_ids", ids);
 }
 
+// ─── Default Bundle Quantities ───────────────────────────
+
+export interface DefaultQuantities {
+  followers: number;
+  likes: number;
+  views: number;
+}
+
+const DEFAULT_BUNDLE_QUANTITIES: DefaultQuantities = {
+  followers: 0,
+  likes: 0,
+  views: 0,
+};
+
+export async function getDefaultQuantities(): Promise<DefaultQuantities> {
+  return getSetting("default_quantities", DEFAULT_BUNDLE_QUANTITIES);
+}
+
+export async function setDefaultQuantities(qty: DefaultQuantities): Promise<void> {
+  return setSetting("default_quantities", qty);
+}
+
 // ─── Admin Auth ──────────────────────────────────────────
 
 export async function getAdminByUsername(username: string) {

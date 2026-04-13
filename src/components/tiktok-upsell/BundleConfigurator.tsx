@@ -199,16 +199,44 @@ export default function BundleConfigurator() {
   const didPreselect = useRef(false);
   useEffect(() => {
     if (loading || didPreselect.current) return;
-    if (followersQty === 0 && followersTiers.length >= 2) {
-      setFollowersQty(followersTiers[1].quantity);
-    }
-    if (likesQty === 0 && likesTiers.length >= 1) {
-      setLikesQty(likesTiers[0].quantity);
-    }
-    if (viewsQty === 0 && viewsTiers.length >= 2) {
-      setViewsQty(viewsTiers[1].quantity);
-    }
     didPreselect.current = true;
+
+    // Fetch admin-configured defaults, fall back to tier-based defaults
+    fetch("/api/default-quantities")
+      .then((r) => r.ok ? r.json() : null)
+      .then((cfg: { followers: number; likes: number; views: number } | null) => {
+        const fDef = cfg?.followers || 0;
+        const lDef = cfg?.likes || 0;
+        const vDef = cfg?.views || 0;
+
+        if (followersQty === 0) {
+          if (fDef > 0 && followersTiers.some((t) => t.quantity === fDef)) {
+            setFollowersQty(fDef);
+          } else if (followersTiers.length >= 2) {
+            setFollowersQty(followersTiers[1].quantity);
+          }
+        }
+        if (likesQty === 0) {
+          if (lDef > 0 && likesTiers.some((t) => t.quantity === lDef)) {
+            setLikesQty(lDef);
+          } else if (likesTiers.length >= 1) {
+            setLikesQty(likesTiers[0].quantity);
+          }
+        }
+        if (viewsQty === 0) {
+          if (vDef > 0 && viewsTiers.some((t) => t.quantity === vDef)) {
+            setViewsQty(vDef);
+          } else if (viewsTiers.length >= 2) {
+            setViewsQty(viewsTiers[1].quantity);
+          }
+        }
+      })
+      .catch(() => {
+        // Fallback to tier-based defaults
+        if (followersQty === 0 && followersTiers.length >= 2) setFollowersQty(followersTiers[1].quantity);
+        if (likesQty === 0 && likesTiers.length >= 1) setLikesQty(likesTiers[0].quantity);
+        if (viewsQty === 0 && viewsTiers.length >= 2) setViewsQty(viewsTiers[1].quantity);
+      });
   }, [loading, followersTiers]);
 
   /* ─── Micro-feedback state ─── */

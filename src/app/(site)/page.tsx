@@ -448,7 +448,7 @@ export default function Pricing2Page() {
     <>
       {/* ───────────── SEARCH PHASE: Full-width split hero (SAME AS pricing-socials) ───────────── */}
       {isSearchPhase && (
-        <div className="relative z-10 min-h-[112dvh] sm:min-h-[100dvh] flex flex-col">
+        <div className="relative z-10 min-h-[112dvh] sm:min-h-[100dvh] lg:min-h-screen flex flex-col">
           {/* Multi-layer gradient mesh background */}
           <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
             <div className="absolute top-[5%] left-[10%] w-[600px] h-[600px] rounded-full blur-[180px] opacity-[0.08] transition-colors duration-700" style={{ backgroundColor: accent }} />
@@ -460,11 +460,11 @@ export default function Pricing2Page() {
 
           {/* Main split hero */}
           <div className="relative z-10 flex-1 flex items-center">
-            <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-0 sm:py-16 md:py-0">
-              <div className="relative max-w-2xl mx-auto min-h-[100dvh] sm:min-h-0 flex flex-col justify-center items-center sm:items-start text-center sm:text-left pt-0 sm:pt-0">
+            <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 py-0 sm:py-16 md:py-0 lg:py-0">
+              <div className="relative max-w-2xl sm:max-w-3xl lg:max-w-none xl:max-w-none mx-auto min-h-[100dvh] sm:min-h-0 lg:min-h-[85vh] flex flex-col justify-center items-center sm:items-start text-center sm:text-left pt-0 sm:pt-0 lg:pt-8 xl:pt-12">
                 {mounted ? <>
                   {/* Animated badge */}
-                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="absolute top-3 left-1/2 -translate-x-1/2 sm:top-6 sm:left-0 sm:translate-x-0">
+                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="absolute top-3 left-1/2 -translate-x-1/2 sm:top-6 sm:left-0 sm:translate-x-0 lg:top-10 xl:top-14">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-white/[0.06] to-white/[0.02] border border-white/[0.1] backdrop-blur-sm">
                       <span className="relative flex h-2 w-2">
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style={{ backgroundColor: accent }} />
@@ -478,7 +478,7 @@ export default function Pricing2Page() {
                   </motion.div>
 
                   {/* H1 */}
-                  <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="mt-16 sm:mt-0 text-[clamp(2.2rem,9vw,6.2rem)] font-extrabold text-white tracking-[-0.03em] leading-[0.98] mb-7 sm:mb-6">
+                  <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="mt-16 sm:mt-0 text-[clamp(2.2rem,9vw,6.2rem)] md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-[5.2rem] font-extrabold text-white tracking-[-0.03em] leading-[0.98] md:leading-tight lg:leading-[1.05] mb-7 sm:mb-5 lg:mb-8">
                     {t("pricing.heroTitle")}{" "}
                     <span className="relative inline-block">
                       <span className="bg-gradient-to-r from-[#69C9D0] via-[#9BE8EC] to-[#ee1d52] bg-clip-text text-transparent">
@@ -491,15 +491,15 @@ export default function Pricing2Page() {
                   </motion.h1>
 
                   {/* Subtitle — desktop only */}
-                  <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }} className="hidden sm:block text-[16px] text-zinc-400 leading-relaxed mb-10 max-w-lg">
+                  <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }} className="hidden sm:block text-[16px] md:text-[17px] lg:text-[19px] xl:text-[20px] text-zinc-400 leading-relaxed sm:leading-[1.7] mb-10 lg:mb-12 max-w-lg md:max-w-xl lg:max-w-2xl">
                     {t("pricing2.heroSubtitle")}
                   </motion.p>
 
                   {/* Search Card (CTA) */}
-                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} className="mb-32 sm:mb-14">
-                    <div id="search-card" className="relative max-w-lg sm:max-w-xl mx-auto">
+                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} className="mb-32 sm:mb-14 lg:mb-16 xl:mb-20">
+                    <div id="search-card" className="relative max-w-lg sm:max-w-xl lg:max-w-2xl xl:max-w-3xl mx-auto sm:mx-0">
                       {/* Ambient glow */}
-                      <div className="absolute -inset-6 rounded-[48px] opacity-[0.08] blur-[48px] translate-y-8 sm:translate-y-4" style={{ background: gradient }} />
+                      <div className="absolute -inset-6 rounded-[48px] opacity-[0.08] blur-[48px] translate-y-8 sm:translate-y-4 lg:blur-[64px] lg:-inset-8" style={{ background: gradient }} />
 
                       <ProfileSearchInput />
 
@@ -510,7 +510,7 @@ export default function Pricing2Page() {
                       )}
 
                       {/* Inline trust — single clean line */}
-                      <div className="mt-4 flex items-center justify-center gap-4 sm:gap-6">
+                      <div className="mt-4 flex items-center justify-center gap-4 sm:gap-6 sm:justify-start lg:gap-8">
                         <div className="flex items-center gap-1">
                           <Shield className="w-3 h-3 text-zinc-600" />
                           <span className="text-[10px] sm:text-[11px] text-zinc-500">{t("pricing2.trustBadge2")}</span>
@@ -530,16 +530,16 @@ export default function Pricing2Page() {
                   </motion.div>
 
                   {/* Social proof row — hidden on mobile to keep hero above fold */}
-                  <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="hidden sm:flex sm:flex-row sm:items-center gap-5 sm:gap-8 mt-14">
+                  <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="hidden sm:flex sm:flex-row sm:items-center gap-5 sm:gap-8 lg:gap-12 mt-14 lg:mt-16 xl:mt-20">
                     <HeroReviews />
-                    <div className="flex items-center gap-4 ml-auto">
+                    <div className="flex items-center gap-4 lg:gap-5 ml-auto">
                       {[
                         { value: "4 200+", label: t("pricing.statCreators") },
                         { value: "98%", label: t("pricing.statSatisfaction") },
                       ].map((stat, i) => (
-                        <div key={i} className="flex items-center gap-3 px-4 py-2 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                          <p className="text-[14px] font-bold text-white leading-none">{stat.value}</p>
-                          <p className="text-[10px] text-zinc-500">{stat.label}</p>
+                        <div key={i} className="flex items-center gap-3 px-4 py-2 lg:px-5 lg:py-3 rounded-xl lg:rounded-2xl bg-white/[0.03] border border-white/[0.06]">
+                          <p className="text-[14px] lg:text-[16px] font-bold text-white leading-none">{stat.value}</p>
+                          <p className="text-[10px] lg:text-[11px] text-zinc-500">{stat.label}</p>
                         </div>
                       ))}
                     </div>
@@ -554,9 +554,9 @@ export default function Pricing2Page() {
           {mounted && <div data-nosnippet="">
 
             {/* ── 3 Easy Steps (WHITEHAT) ── */}
-            <section ref={trackSection("how_it_works")} className="relative z-10 py-12 sm:py-16 md:py-24 border-t border-white/[0.04]">
-              <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12">
-                <div className="text-center mb-8 sm:mb-12 md:mb-14">
+            <section ref={trackSection("how_it_works")} className="relative z-10 py-12 sm:py-16 md:py-24 lg:py-32 xl:py-36 border-t border-white/[0.04]">
+              <div className="max-w-5xl lg:max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
+                <div className="text-center mb-8 sm:mb-12 md:mb-14 lg:mb-20">
                   <h2 className="text-[clamp(1.4rem,3.5vw,2.4rem)] font-bold text-white tracking-tight">
                     {t("pricing2.howItWorks")}{" "}
                     <br />
@@ -566,7 +566,7 @@ export default function Pricing2Page() {
                   </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
                   {[
                     { n: "1", icon: Search,     title: t("pricing2.step01Title"), desc: t("pricing2.step01Desc") },
                     { n: "2", icon: Eye,         title: t("pricing2.step02Title"), desc: t("pricing2.step02Desc") },
@@ -596,9 +596,9 @@ export default function Pricing2Page() {
             </section>
 
             {/* Guarantees — horizontal strip (WHITEHAT) */}
-            <section ref={trackSection("guarantees")} className="relative z-10 py-10 sm:py-12 md:py-16 border-t border-white/[0.04]">
-              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <section ref={trackSection("guarantees")} className="relative z-10 py-10 sm:py-12 md:py-16 lg:py-24 border-t border-white/[0.04]">
+              <div className="max-w-6xl lg:max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
                   {[
                     { icon: Shield, title: t("pricing2.trustBadge1"), desc: t("pricing2.faq1A").slice(0, 80) + "…" },
                     { icon: Check, title: t("pricing2.trustBadge2"), desc: t("pricing2.faq2A").slice(0, 80) + "…" },
@@ -620,8 +620,8 @@ export default function Pricing2Page() {
             </section>
 
             {/* FAQ (WHITEHAT) */}
-            <section ref={trackSection("faq")} className="relative z-10 py-12 sm:py-16 md:py-24 border-t border-white/[0.04]">
-              <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12">
+            <section ref={trackSection("faq")} className="relative z-10 py-12 sm:py-16 md:py-24 lg:py-32 border-t border-white/[0.04]">
+              <div className="max-w-3xl lg:max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
                 <div className="text-center mb-8 sm:mb-12">
                   <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-zinc-500 mb-3">FAQ</p>
                   <h2 className="text-[clamp(1.4rem,3.5vw,2.4rem)] font-bold text-white tracking-tight">{t("pricing2.faqTitle")}</h2>
@@ -635,8 +635,8 @@ export default function Pricing2Page() {
             </section>
 
             {/* Compliance footer banner */}
-            <section className="relative z-10 pb-14 sm:pb-20">
-              <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12">
+            <section className="relative z-10 pb-14 sm:pb-20 lg:pb-28">
+              <div className="max-w-3xl lg:max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
                 <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 sm:p-8 text-center">
                   <div className="flex items-center justify-center gap-2 mb-3">
                     <Shield className="w-4 h-4 text-emerald-400" />
@@ -650,33 +650,33 @@ export default function Pricing2Page() {
             </section>
 
             {/* CTA bottom */}
-            <section ref={trackSection("cta_bottom")} className="relative z-10 py-14 sm:py-20 md:py-28 lg:py-32 overflow-hidden">
+            <section ref={trackSection("cta_bottom")} className="relative z-10 py-14 sm:py-20 md:py-28 lg:py-36 xl:py-40 overflow-hidden">
               <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full opacity-[0.08]" style={{ background: gradient, filter: "blur(150px)" }} />
                 <div className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full opacity-[0.04]" style={{ backgroundColor: "#69C9D0", filter: "blur(100px)" }} />
               </div>
 
-              <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-12">
+              <div className="relative z-10 max-w-3xl lg:max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
                 <div className="relative rounded-3xl p-[1px]" style={{ background: `linear-gradient(135deg, ${accent}30, transparent 50%, ${accent}15)` }}>
-                  <div className="rounded-2xl sm:rounded-3xl bg-zinc-950/80 backdrop-blur-xl px-5 sm:px-10 md:px-14 py-10 sm:py-14 md:py-16 text-center">
+                  <div className="rounded-2xl sm:rounded-3xl bg-zinc-950/80 backdrop-blur-xl px-5 sm:px-10 md:px-14 lg:px-20 py-10 sm:py-14 md:py-16 lg:py-20 text-center">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.06] border border-white/[0.08] text-[11px] font-semibold uppercase tracking-[0.15em] text-zinc-400 mb-6">
                       <Sparkles className="w-3 h-3" style={{ color: accent }} />
                       {t("pricing.ctaBottomTitle")}
                     </div>
 
-                    <h2 className="text-[clamp(1.6rem,4vw,2.8rem)] font-extrabold text-white tracking-tight mb-4 leading-tight">
+                    <h2 className="text-[clamp(1.6rem,4vw,2.8rem)] lg:text-4xl xl:text-5xl font-extrabold text-white tracking-tight mb-4 lg:mb-6 leading-tight">
                       {t("pricing.heroTitle")}{" "}
                       <span className="bg-gradient-to-r from-[#69C9D0] to-[#ee1d52] bg-clip-text text-transparent">
                         TikTok
                       </span>
                     </h2>
-                    <p className="text-[15px] text-zinc-400 mb-8 max-w-md mx-auto leading-relaxed">
+                    <p className="text-[15px] lg:text-[17px] text-zinc-400 mb-8 lg:mb-10 max-w-md lg:max-w-lg mx-auto leading-relaxed">
                       {t("pricing.ctaBottomSubtitle")}
                     </p>
 
                     <button
                       onClick={() => { posthog?.capture("cta_bottom_clicked", { variant: "homepage", platform, currency }); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                      className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-5 min-h-[48px] rounded-2xl text-white text-[15px] sm:text-[16px] font-bold transition-all duration-300 hover:scale-[1.04] active:scale-[0.97]"
+                      className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 sm:px-10 lg:px-12 py-4 sm:py-5 lg:py-6 min-h-[48px] rounded-2xl lg:rounded-3xl text-white text-[15px] sm:text-[16px] lg:text-[17px] font-bold transition-all duration-300 hover:scale-[1.04] active:scale-[0.97]"
                       style={{ background: gradient, boxShadow: `0 0 60px -10px ${accent}50, 0 0 20px -5px ${accent}30` }}
                     >
                       <TikTokIcon className="w-5 h-5" />
@@ -718,7 +718,7 @@ export default function Pricing2Page() {
             <div className="absolute top-[30%] left-[20%] w-[500px] h-[500px] rounded-full blur-[160px] opacity-[0.06] transition-colors duration-700" style={{ backgroundColor: accent }} />
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-6 md:py-10">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 py-6 md:py-10 lg:py-12">
             {/* Top bar: back + steps */}
             <div className="flex items-center justify-between mb-3">
               <button onClick={reset} className="text-[13px] text-zinc-500 hover:text-white transition-colors flex items-center gap-1.5">
