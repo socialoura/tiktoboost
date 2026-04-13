@@ -464,15 +464,12 @@ export default function Pricing2Page() {
                 {mounted ? <>
                   {/* Animated badge */}
                   <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="absolute top-3 left-1/2 -translate-x-1/2 sm:top-6 sm:left-0 sm:translate-x-0 lg:top-10 xl:top-14">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-white/[0.06] to-white/[0.02] border border-white/[0.1] backdrop-blur-sm">
-                      <span className="relative flex h-2 w-2">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style={{ backgroundColor: accent }} />
-                        <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: accent }} />
+                    <div className="rounded-xl border border-white/[0.1] bg-white/[0.05] hover:bg-white/[0.08] flex items-center w-fit px-3 py-2 text-xs text-zinc-300 mx-auto md:mx-0">
+                      <span className="relative flex ml-0.5 mr-2.5 h-3 w-3">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                        <span className="relative inline-flex h-3 w-3 rounded-full bg-green-500" />
                       </span>
-                      <span className="text-[11px] sm:text-[12px] font-semibold text-zinc-300 tracking-wide uppercase">
-                        <span className="bg-gradient-to-r from-[#69C9D0] to-[#ee1d52] bg-clip-text text-transparent">12 847+</span>
-                        {" "}{t("pricing.statCampaigns").toLowerCase()}
-                      </span>
+                      Tous les services sont fonctionnels
                     </div>
                   </motion.div>
 
