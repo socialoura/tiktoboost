@@ -304,7 +304,6 @@ export default function Pricing2Page() {
   const {
     step,
     platform,
-    setPlatform,
     profile,
     profileError,
     username,
