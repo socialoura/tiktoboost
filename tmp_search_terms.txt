@@ -1,0 +1,15 @@
+﻿Au caractère Ligne:3 : 12
++ '; foreach( in [2..(.Length-1)]) { if(.Trim()) { Write-Output  } }
++            ~
+Nom de variable manquant après l'instruction foreach.
+Au caractère Ligne:3 : 32
++ '; foreach( in [2..(.Length-1)]) { if(.Trim()) { Write-Output  } }
++                                ~
+Jeton inattendu « ) » dans l'expression ou l'instruction.
+Au caractère Ligne:3 : 45
++ '; foreach( in [2..(.Length-1)]) { if(.Trim()) { Write-Output  } }
++                                             ~
+Une expression est attendue après « ( ».
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingVariableNameAfterForeach
+ 
