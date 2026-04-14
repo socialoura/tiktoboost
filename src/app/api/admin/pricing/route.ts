@@ -12,7 +12,8 @@ export async function GET() {
   try {
     const pricing = await getPricing();
     return NextResponse.json(pricing);
-  } catch {
+  } catch (error) {
+    console.error("[Admin Pricing GET]", error);
     return NextResponse.json(getDefaultPricing());
   }
 }

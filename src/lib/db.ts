@@ -418,6 +418,7 @@ export async function getStatsByDate(date: string): Promise<DailyStats> {
 }
 
 export async function updateOrderStatus(orderId: number, status: string) {
+  await ensureDbReady();
   await sql`
     UPDATE orders SET order_status = ${status}, updated_at = CURRENT_TIMESTAMP
     WHERE id = ${orderId}
@@ -425,6 +426,7 @@ export async function updateOrderStatus(orderId: number, status: string) {
 }
 
 export async function updateOrderNotes(orderId: number, notes: string) {
+  await ensureDbReady();
   await sql`
     UPDATE orders SET notes = ${notes}, updated_at = CURRENT_TIMESTAMP
     WHERE id = ${orderId}
@@ -432,6 +434,7 @@ export async function updateOrderNotes(orderId: number, notes: string) {
 }
 
 export async function updateOrderCost(orderId: number, cost: number) {
+  await ensureDbReady();
   await sql`
     UPDATE orders SET cost = ${cost}, updated_at = CURRENT_TIMESTAMP
     WHERE id = ${orderId}
@@ -534,6 +537,7 @@ export async function getPricing(): Promise<PricingData> {
 }
 
 export async function setPricing(data: PricingData) {
+  await ensureDbReady();
   await sql`
     INSERT INTO pricing (id, data)
     VALUES ('pricing-data', ${JSON.stringify(data)}::jsonb)
@@ -640,6 +644,7 @@ export async function setDefaultQuantities(qty: DefaultQuantities): Promise<void
 // ─── Admin Auth ──────────────────────────────────────────
 
 export async function getAdminByUsername(username: string) {
+  await ensureDbReady();
   const result = await sql`
     SELECT * FROM admin_users WHERE username = ${username}
   `;
