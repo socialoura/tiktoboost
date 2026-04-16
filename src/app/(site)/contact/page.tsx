@@ -146,8 +146,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-[13px] font-medium text-white">{t("contact.emailSupport")}</p>
-                    <a href="mailto:reachopia@gmail.com" className="text-[14px] text-indigo-400 hover:text-indigo-300 transition-colors">
-                      reachopia@gmail.com
+                    <a href="mailto:contact@tiktoboost.com" className="text-[14px] text-indigo-400 hover:text-indigo-300 transition-colors">
+                      contact@tiktoboost.com
                     </a>
                   </div>
                 </div>

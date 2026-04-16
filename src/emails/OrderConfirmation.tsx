@@ -55,10 +55,10 @@ export default function OrderConfirmationEmail({
           {/* Header with gradient */}
           <Section style={header}>
             <Img
-              src="https://reachopia.com/logo.png"
+              src="https://www.tiktoboost.com/logo.png"
               width="180"
               height="48"
-              alt="Reachopia"
+              alt="TiktoBoost"
               style={{ margin: "0 auto" }}
             />
           </Section>
@@ -170,7 +170,7 @@ export default function OrderConfirmationEmail({
               Want to follow the progress of your campaign in real time?
             </Text>
             <Link
-              href={`https://reachopia.com/dashboard?email=${encodeURIComponent(order.email || "")}`}
+              href={`https://www.tiktoboost.com/dashboard?email=${encodeURIComponent(order.email || "")}`}
               style={trackButton}
             >
               Track Your Order →
@@ -184,7 +184,7 @@ export default function OrderConfirmationEmail({
             <Text style={ctaText}>
               Need help? Our support team is available 24/7.
             </Text>
-            <Link href="mailto:reachopia@gmail.com" style={ctaButton}>
+            <Link href="mailto:contact@tiktoboost.com" style={ctaButton}>
               Contact Support
             </Link>
           </Section>
@@ -192,7 +192,7 @@ export default function OrderConfirmationEmail({
           {/* Footer */}
           <Section style={footer}>
             <Text style={footerText}>
-              © {new Date().getFullYear()} Reachopia. All rights reserved.
+              © {new Date().getFullYear()} TiktoBoost. All rights reserved.
             </Text>
             <Text style={footerSmall}>
               This email was sent to confirm your order. If you did not make this

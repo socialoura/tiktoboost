@@ -41,8 +41,8 @@ export async function POST(req: NextRequest) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: "Reachopia Support",
-        avatar_url: "https://reachopia.com/logo.png",
+        username: "TiktoBoost Support",
+        avatar_url: "https://www.tiktoboost.com/logo.png",
         embeds: [
           {
             title: "📩 Nouvelle demande de support client",
@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
               },
             ],
             footer: {
-              text: "Reachopia — Support Widget",
+              text: "TiktoBoost — Support Widget",
             },
             timestamp: new Date().toISOString(),
           },

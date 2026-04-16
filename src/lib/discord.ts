@@ -69,8 +69,8 @@ export async function sendBulkFollowsAlert(params: {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: "Reachopia Alerts",
-        avatar_url: "https://reachopia.com/logo.png",
+        username: "TiktoBoost Alerts",
+        avatar_url: "https://www.tiktoboost.com/logo.png",
         embeds: [embed],
       }),
       signal: AbortSignal.timeout(10000),
@@ -121,8 +121,8 @@ export async function sendUsernameNotFoundAlert(params: {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: "Reachopia Alerts",
-        avatar_url: "https://reachopia.com/logo.png",
+        username: "TiktoBoost Alerts",
+        avatar_url: "https://www.tiktoboost.com/logo.png",
         embeds: [embed],
       }),
       signal: AbortSignal.timeout(10000),
@@ -193,8 +193,8 @@ export async function sendOrderQueuedAlert(params: {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: "Reachopia Alerts",
-        avatar_url: "https://reachopia.com/logo.png",
+        username: "TiktoBoost Alerts",
+        avatar_url: "https://www.tiktoboost.com/logo.png",
         embeds: [embed],
       }),
       signal: AbortSignal.timeout(10000),
@@ -255,14 +255,14 @@ export async function sendDiscordNotification(
       },
     ],
     footer: {
-      text: "Reachopia — Système de commandes",
+      text: "TiktoBoost — Système de commandes",
     },
     timestamp: new Date().toISOString(),
   };
 
   const payload: DiscordWebhookPayload = {
-    username: "Reachopia Orders",
-    avatar_url: "https://reachopia.com/logo.png",
+    username: "TiktoBoost Orders",
+    avatar_url: "https://www.tiktoboost.com/logo.png",
     embeds: [embed],
   };
 

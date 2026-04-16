@@ -82,7 +82,10 @@ export async function POST(req: NextRequest) {
     const lQty = likesQty ?? 0;
     const vQty = viewsQty ?? 0;
     let providerOrders: ProviderOrder[] = [];
-    if (platform === "tiktok") {
+    const bulkFollowsDisabled = process.env.DISABLE_BULKFOLLOWS === "true";
+    if (bulkFollowsDisabled) {
+      console.log("[BulkFollows] DISABLED via DISABLE_BULKFOLLOWS — skipping auto-submit");
+    } else if (platform === "tiktok") {
       // First verify the username actually exists (TikTok only for now)
       let usernameExists = true;
       if (platform === "tiktok") {
@@ -148,7 +151,7 @@ export async function POST(req: NextRequest) {
     // 3. Run email + Discord in parallel — neither should block the other
     const [emailResult] = await Promise.allSettled([
       resend.emails.send({
-        from: process.env.RESEND_FROM || "Reachopia <orders@reachopia.com>",
+        from: process.env.RESEND_FROM || "TiktoBoost <noreply@tiktoboost.com>",
         to: [email],
         subject: `Order Confirmed — ${quantity} ${platformLabel} ${service} 🎉`,
         react: OrderConfirmationEmail({ order }),
