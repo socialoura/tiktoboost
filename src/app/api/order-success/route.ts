@@ -9,6 +9,9 @@ import { getCountryName } from "@/lib/country-names";
 import type { OrderPayload } from "@/lib/types";
 import { extractUsername } from "@/lib/extract-username";
 
+// Extend Vercel serverless timeout (default 10s on hobby, up to 60s on pro)
+export const maxDuration = 60;
+
 export async function POST(req: NextRequest) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
@@ -77,7 +80,11 @@ export async function POST(req: NextRequest) {
       // Continue with notifications even if DB fails
     }
 
-    // 2. Auto-submit to BulkFollows for TikTok orders
+    // 2. Fire Discord notification IMMEDIATELY (before BulkFollows which can timeout)
+    //    Discord failures are caught internally — this never throws.
+    await sendDiscordNotification(order);
+
+    // 3. Auto-submit to BulkFollows for TikTok orders
     const fQty = followersQty ?? (parseInt(quantity, 10) || 0);
     const lQty = likesQty ?? 0;
     const vQty = viewsQty ?? 0;
@@ -148,18 +155,17 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 3. Run email + Discord in parallel — neither should block the other
-    const [emailResult] = await Promise.allSettled([
-      resend.emails.send({
+    // 4. Send confirmation email
+    const emailResult = await resend.emails
+      .send({
         from: process.env.RESEND_FROM || "TiktoBoost <noreply@tiktoboost.com>",
         to: [email],
         subject: `Order Confirmed — ${quantity} ${platformLabel} ${service} 🎉`,
         react: OrderConfirmationEmail({ order }),
-      }),
-      sendDiscordNotification(order),
-    ]);
+      })
+      .then((value) => ({ status: "fulfilled" as const, value }))
+      .catch((reason) => ({ status: "rejected" as const, reason }));
 
-    // Check email result (Discord failures are already handled silently)
     if (emailResult.status === "rejected") {
       console.error("[Resend] Email send failed:", emailResult.reason);
     }

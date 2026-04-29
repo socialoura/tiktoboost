@@ -445,100 +445,199 @@ export default function Pricing2Page() {
 
   return (
     <>
-      {/* ───────────── SEARCH PHASE: Full-width split hero (SAME AS pricing-socials) ───────────── */}
+      {/* ───────────── SEARCH PHASE: Modern hero ───────────── */}
       {isSearchPhase && (
-        <div className="relative z-10 min-h-[112dvh] sm:min-h-[100dvh] lg:min-h-screen flex flex-col">
-          {/* Multi-layer gradient mesh background */}
+        <div className="relative z-10 min-h-[100dvh] flex flex-col">
+          {/* Multi-layer gradient mesh background — richer + animated */}
           <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-            <div className="absolute top-[5%] left-[10%] w-[600px] h-[600px] rounded-full blur-[180px] opacity-[0.08] transition-colors duration-700" style={{ backgroundColor: accent }} />
-            <div className="absolute top-[40%] right-[5%] w-[500px] h-[500px] rounded-full blur-[160px] opacity-[0.05]" style={{ backgroundColor: "#69C9D0" }} />
-            <div className="absolute bottom-[10%] left-[30%] w-[400px] h-[400px] rounded-full blur-[140px] opacity-[0.04]" style={{ backgroundColor: "#ee1d52" }} />
+            <motion.div
+              animate={{ scale: [1, 1.15, 1], opacity: [0.08, 0.12, 0.08] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-[5%] left-[10%] w-[600px] h-[600px] rounded-full blur-[180px]"
+              style={{ backgroundColor: accent }}
+            />
+            <motion.div
+              animate={{ scale: [1.1, 1, 1.1], opacity: [0.05, 0.08, 0.05] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              className="absolute top-[40%] right-[5%] w-[500px] h-[500px] rounded-full blur-[160px]"
+              style={{ backgroundColor: "#69C9D0" }}
+            />
+            <motion.div
+              animate={{ scale: [1, 1.2, 1], opacity: [0.04, 0.07, 0.04] }}
+              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+              className="absolute bottom-[10%] left-[30%] w-[400px] h-[400px] rounded-full blur-[140px]"
+              style={{ backgroundColor: "#ee1d52" }}
+            />
             {/* Subtle grid pattern */}
             <div className="absolute inset-0 opacity-[0.015]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+            {/* Top vignette */}
+            <div className="absolute top-0 inset-x-0 h-[300px] bg-gradient-to-b from-black/60 to-transparent" />
           </div>
 
-          {/* Main split hero */}
-          <div className="relative z-10 flex-1 flex items-center">
-            <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 py-0 sm:py-16 md:py-0 lg:py-0">
-              <div className="relative max-w-2xl sm:max-w-3xl lg:max-w-none xl:max-w-none mx-auto min-h-[100dvh] sm:min-h-0 lg:min-h-[85vh] flex flex-col justify-center items-center sm:items-start text-center sm:text-left pt-0 sm:pt-0 lg:pt-8 xl:pt-12">
+          {/* Main hero */}
+          <div className="relative z-10 flex-1 flex items-center pt-20 sm:pt-24 lg:pt-12 pb-12 sm:pb-16">
+            <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
+              <div className="relative mx-auto max-w-3xl lg:max-w-none flex flex-col items-center text-center lg:items-start lg:text-left">
                 {mounted ? <>
-                  {/* Animated badge */}
-                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="absolute top-3 left-1/2 -translate-x-1/2 sm:top-6 sm:left-0 sm:translate-x-0 lg:top-10 xl:top-14">
-                    <div className="rounded-xl border border-white/[0.1] bg-white/[0.05] hover:bg-white/[0.08] flex items-center w-fit px-3 py-2 text-xs text-zinc-300 mx-auto md:mx-0">
-                      <span className="relative flex ml-0.5 mr-2.5 h-3 w-3">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                        <span className="relative inline-flex h-3 w-3 rounded-full bg-green-500" />
-                      </span>
-                      Tous les services sont fonctionnels
-                    </div>
+                  {/* Status pill — integrated, not absolute */}
+                  <motion.div
+                    initial={{ opacity: 0, y: -12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/[0.08] border border-emerald-500/20 backdrop-blur-sm mb-6 sm:mb-8"
+                  >
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                    </span>
+                    <span className="text-[11px] sm:text-[12px] font-medium text-emerald-300 tracking-wide">
+                      {t("pricing2.allServicesOperational")}
+                    </span>
+                    <span className="hidden sm:inline-block w-px h-3 bg-emerald-500/20" />
+                    <span className="hidden sm:inline text-[11px] text-emerald-400/70">
+                      <AnimCounter target={247} duration={2000} /> {t("pricing2.ordersToday")}
+                    </span>
                   </motion.div>
 
-                  {/* H1 */}
-                  <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="mt-16 sm:mt-0 text-[clamp(2.2rem,9vw,6.2rem)] md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-[5.2rem] font-extrabold text-white tracking-[-0.03em] leading-[0.98] md:leading-tight lg:leading-[1.05] mb-7 sm:mb-5 lg:mb-8">
+                  {/* H1 — bigger, bolder, more impact */}
+                  <motion.h1
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className="text-[clamp(2.6rem,9vw,5.8rem)] md:text-6xl lg:text-7xl xl:text-[5.5rem] 2xl:text-[6rem] font-extrabold text-white tracking-[-0.035em] leading-[0.95] md:leading-[1] mb-5 sm:mb-6 lg:mb-7"
+                  >
                     {t("pricing.heroTitle")}{" "}
                     <span className="relative inline-block">
-                      <span className="bg-gradient-to-r from-[#69C9D0] via-[#9BE8EC] to-[#ee1d52] bg-clip-text text-transparent">
+                      <span
+                        className="bg-gradient-to-r from-[#69C9D0] via-[#9BE8EC] to-[#ee1d52] bg-clip-text text-transparent bg-[length:200%_auto] animate-[shimmer_4s_ease-in-out_infinite]"
+                        style={{ backgroundSize: "200% auto" }}
+                      >
                         TikTok
                       </span>
-                      <span className="absolute -bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-[#69C9D0] via-[#9BE8EC] to-[#ee1d52] opacity-60" />
+                      <motion.span
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+                        style={{ originX: 0 }}
+                        className="absolute -bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-[#69C9D0] via-[#9BE8EC] to-[#ee1d52] opacity-70"
+                      />
                     </span>
                     <span className="hidden sm:inline"><br /></span>{" "}
                     {t("pricing.heroTitleEnd")}
                   </motion.h1>
+                  <style>{`@keyframes shimmer { 0%, 100% { background-position: 0% 50% } 50% { background-position: 100% 50% } }`}</style>
 
-                  {/* Subtitle — desktop only */}
-                  <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }} className="hidden sm:block text-[16px] md:text-[17px] lg:text-[19px] xl:text-[20px] text-zinc-400 leading-relaxed sm:leading-[1.7] mb-10 lg:mb-12 max-w-lg md:max-w-xl lg:max-w-2xl">
+                  {/* Subtitle — visible on ALL screens now */}
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="text-[14px] sm:text-[16px] md:text-[17px] lg:text-[19px] xl:text-[20px] text-zinc-400 leading-relaxed sm:leading-[1.7] mb-8 sm:mb-10 lg:mb-12 max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl"
+                  >
                     {t("pricing2.heroSubtitle")}
                   </motion.p>
 
-                  {/* Search Card (CTA) */}
-                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} className="mb-32 sm:mb-14 lg:mb-16 xl:mb-20">
-                    <div id="search-card" className="relative max-w-lg sm:max-w-xl lg:max-w-2xl xl:max-w-3xl mx-auto sm:mx-0">
-                      {/* Ambient glow */}
-                      <div className="absolute -inset-6 rounded-[48px] opacity-[0.08] blur-[48px] translate-y-8 sm:translate-y-4 lg:blur-[64px] lg:-inset-8" style={{ background: gradient }} />
+                  {/* Search Card with ambient glow + decorative sparkles */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="w-full mb-8 sm:mb-10 lg:mb-12"
+                  >
+                    <div id="search-card" className="relative w-full max-w-lg sm:max-w-xl lg:max-w-2xl xl:max-w-3xl mx-auto lg:mx-0">
+                      {/* Outer ambient glow */}
+                      <div className="absolute -inset-8 rounded-[48px] opacity-[0.1] blur-[60px]" style={{ background: gradient }} />
 
-                      <ProfileSearchInput />
+                      {/* Floating sparkle decorations — desktop only */}
+                      <motion.div
+                        animate={{ y: [0, -8, 0], opacity: [0.4, 0.8, 0.4] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                        className="hidden lg:block absolute -top-4 -right-4 z-0"
+                      >
+                        <Sparkles className="w-5 h-5" style={{ color: "#69C9D0" }} />
+                      </motion.div>
+                      <motion.div
+                        animate={{ y: [0, 8, 0], opacity: [0.3, 0.7, 0.3] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                        className="hidden lg:block absolute -bottom-2 -left-6 z-0"
+                      >
+                        <Sparkles className="w-4 h-4" style={{ color: "#ee1d52" }} />
+                      </motion.div>
 
-                      {profileError && (
-                        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-3 text-[13px] text-red-400">
-                          {profileError}
-                        </motion.p>
-                      )}
+                      <div className="relative">
+                        <ProfileSearchInput />
 
-                      {/* Inline trust — single clean line */}
-                      <div className="mt-4 flex items-center justify-center gap-4 sm:gap-6 sm:justify-start lg:gap-8">
-                        <div className="flex items-center gap-1">
-                          <Shield className="w-3 h-3 text-zinc-600" />
-                          <span className="text-[10px] sm:text-[11px] text-zinc-500">{t("pricing2.trustBadge2")}</span>
+                        {profileError && (
+                          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-3 text-[13px] text-red-400">
+                            {profileError}
+                          </motion.p>
+                        )}
+                      </div>
+
+                      {/* Trust line */}
+                      <div className="mt-5 sm:mt-6 flex items-center justify-center lg:justify-start gap-4 sm:gap-6">
+                        <div className="flex items-center gap-1.5">
+                          <Shield className="w-3.5 h-3.5 text-emerald-400/70" />
+                          <span className="text-[11px] sm:text-[12px] text-zinc-400 font-medium">{t("pricing2.trustBadge2")}</span>
                         </div>
-                        <div className="w-px h-3 bg-white/[0.06]" />
-                        <div className="flex items-center gap-1">
-                          <Zap className="w-3 h-3 text-zinc-600" />
-                          <span className="text-[10px] sm:text-[11px] text-zinc-500">{t("pricing2.trustBadge4")}</span>
+                        <div className="w-px h-3 bg-white/[0.08]" />
+                        <div className="flex items-center gap-1.5">
+                          <Zap className="w-3.5 h-3.5 text-amber-400/80" />
+                          <span className="text-[11px] sm:text-[12px] text-zinc-400 font-medium">{t("pricing2.trustBadge4")}</span>
                         </div>
-                        <div className="hidden sm:block w-px h-3 bg-white/[0.06]" />
-                        <div className="hidden sm:flex items-center gap-1">
-                          <Lock className="w-3 h-3 text-zinc-600" />
-                          <span className="text-[10px] sm:text-[11px] text-zinc-500">{t("pricing2.trustBadge3")}</span>
+                        <div className="hidden sm:block w-px h-3 bg-white/[0.08]" />
+                        <div className="hidden sm:flex items-center gap-1.5">
+                          <Lock className="w-3.5 h-3.5 text-cyan-400/80" />
+                          <span className="text-[11px] sm:text-[12px] text-zinc-400 font-medium">{t("pricing2.trustBadge3")}</span>
                         </div>
                       </div>
                     </div>
                   </motion.div>
 
-                  {/* Social proof row — hidden on mobile to keep hero above fold */}
-                  <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="hidden sm:flex sm:flex-row sm:items-center gap-5 sm:gap-8 lg:gap-12 mt-14 lg:mt-16 xl:mt-20">
-                    <HeroReviews />
-                    <div className="flex items-center gap-4 lg:gap-5 ml-auto">
+                  {/* Social proof row — NOW visible on mobile too */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.45 }}
+                    className="w-full max-w-2xl lg:max-w-none flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-8 xl:gap-12"
+                  >
+                    {/* Reviews avatars + rating */}
+                    <div className="flex items-center justify-center lg:justify-start">
+                      <HeroReviews />
+                    </div>
+
+                    {/* Stats — compact pills */}
+                    <div className="flex items-center justify-center lg:justify-start gap-2.5 sm:gap-3 lg:gap-4 lg:ml-auto">
                       {[
-                        { value: "4 200+", label: t("pricing.statCreators") },
-                        { value: "98%", label: t("pricing.statSatisfaction") },
+                        { value: "4 200+", label: t("pricing.statCreators"), icon: Users },
+                        { value: "98%", label: t("pricing.statSatisfaction"), icon: Star },
+                        { value: "12K+", label: t("pricing.statCampaigns"), icon: TrendingUp },
                       ].map((stat, i) => (
-                        <div key={i} className="flex items-center gap-3 px-4 py-2 lg:px-5 lg:py-3 rounded-xl lg:rounded-2xl bg-white/[0.03] border border-white/[0.06]">
-                          <p className="text-[14px] lg:text-[16px] font-bold text-white leading-none">{stat.value}</p>
-                          <p className="text-[10px] lg:text-[11px] text-zinc-500">{stat.label}</p>
-                        </div>
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.4, delay: 0.5 + i * 0.08 }}
+                          className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 lg:px-4 lg:py-3 rounded-xl lg:rounded-2xl bg-white/[0.03] border border-white/[0.06] backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/[0.1] transition-all"
+                        >
+                          <stat.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" style={{ color: accent }} />
+                          <div className="flex flex-col leading-none">
+                            <p className="text-[12px] sm:text-[14px] lg:text-[15px] font-bold text-white leading-tight">{stat.value}</p>
+                            <p className="text-[9px] sm:text-[10px] lg:text-[11px] text-zinc-500 leading-tight whitespace-nowrap">{stat.label}</p>
+                          </div>
+                        </motion.div>
                       ))}
                     </div>
+                  </motion.div>
+
+                  {/* Live delivery ticker — bottom of hero */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                    className="mt-6 sm:mt-8 lg:mt-10 flex justify-center lg:justify-start"
+                  >
+                    <LiveDeliveryTicker />
                   </motion.div>
 
                 </> : null}
